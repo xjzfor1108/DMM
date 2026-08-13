@@ -2,9 +2,40 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>🤡🤡🤡🤡</title>
+  <title>🤡🤡🤡🤡</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:微软雅黑;}
+        body{max-width:800px;margin:30px auto;padding:0 20px;background:#f5f7fa;}
+        h2{text-align:center;color:#2d3748;margin-bottom:25px;}
+        .form-box{background:white;padding:20px;border-radius:8px;box-shadow:0 2px 8px #eee;margin-bottom:30px;}
+        input,textarea{width:100%;margin:8px 0;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:14px;}
+        textarea{height:100px;resize:vertical;}
+        button{background:#4299e1;color:white;border:none;padding:11px 30px;border-radius:4px;cursor:pointer;font-size:15px;}
+        button:hover{background:#3182ce;}
+        .msg-list{background:white;padding:20px;border-radius:8px;box-shadow:0 2px 8px #eee;}
+        .msg-item{padding:12px 0;border-bottom:1px solid #eee;}
+        .msg-name{font-weight:bold;color:#2d3748;margin-bottom:5px;}
+        .msg-content{color:#4a5568;line-height:1.6;}
+    </style>
 </head>
 <body>
+<h2>在线留言板</h2>
+<!-- Formspree表单，先去formspree.io注册获取自己的接口地址替换action -->
+<div class="form-box">
+    <form action="https://formspree.io/f/你的专属ID" method="POST">
+        <input type="text" name="昵称" placeholder="请输入你的昵称" required>
+        <textarea name="留言内容" placeholder="写下你的留言..." required></textarea>
+        <button type="submit">提交留言</button>
+    </form>
+</div>
+
+<div class="msg-list">
+    <h3>留言展示区（手动更新展示）</h3>
+    <div class="msg-item">
+        <div class="msg-name">示例访客</div>
+        <div class="msg-content">这是一条示例留言~</div>
+    </div>
+</div>
     <h1>			 	DMM                 </h1>
     <p>☃☃☃☃</p>
 	 <a href="https://www.4399.com">4399</a>
@@ -15,6 +46,5 @@
  <a href="https://fllor.io">fllor</a>
    
     <br>
-
 </body>
 </html>
