@@ -2,7 +2,124 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-  <title>🤡🤡🤡🤡</title>
+    <title>🤡🤡🤡🤡</title>
+</head>
+<body>
+    <h1>			 	DMM                 </h1>
+    <p>☃☃☃☃</p>
+	 <a href="https://www.4399.com">4399</a>
+<br>
+ <a href="https://www.poki.com">poki</a>
+   
+    <br>
+ <a href="https://fllor.io">fllor</a>
+   
+    <br>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>网页贪吃蛇游戏</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: Arial;}
+        body {background: #1a1a1a; display: flex; flex-direction: column; align-items: center; padding-top: 30px;}
+        h1 {color: #4cd964; margin-bottom: 10px;}
+        .score {color: white; font-size: 20px; margin-bottom: 10px;}
+        #gameCanvas {border: 3px solid #4cd964; background: #000;}
+        .tip {color: #aaa; margin-top: 10px; font-size: 14px;}
+    </style>
+</head>
+<body>
+    <h1>贪吃蛇小游戏</h1>
+    <div class="score">得分：<span id="scoreNum">0</span></div>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <div class="tip">方向键控制蛇移动，吃到绿色食物加分，撞墙/撞自己游戏结束</div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDom = document.getElementById('scoreNum');
+        const grid = 20; // 格子大小
+        let snake = [{x:15, y:15}]; // 蛇初始位置
+        let food = {x:5, y:5};
+        let dx = 1, dy = 0; // 移动方向
+        let score = 0;
+        let gameOver = false;
+
+        // 键盘控制方向
+        document.addEventListener('keydown', e=>{
+            if(gameOver) return;
+            switch(e.key){
+                case 'ArrowUp': if(dy!==1){dx=0;dy=-1;} break;
+                case 'ArrowDown': if(dy!==-1){dx=0;dy=1;} break;
+                case 'ArrowLeft': if(dx!==1){dx=-1;dy=0;} break;
+                case 'ArrowRight': if(dx!==-1){dx=1;dy=0;} break;
+            }
+        });
+
+        // 随机生成食物
+        function createFood(){
+            food.x = Math.floor(Math.random()*(canvas.width/grid));
+            food.y = Math.floor(Math.random()*(canvas.height/grid));
+            // 避免食物刷在蛇身上
+            snake.forEach(seg=>{
+                if(seg.x===food.x && seg.y===food.y) createFood();
+            })
+        }
+
+        // 游戏循环渲染
+        function gameLoop(){
+            if(gameOver){
+                ctx.fillStyle = '#fff';
+                ctx.font = '40px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('游戏结束！刷新页面重玩', canvas.width/2, canvas.height/2);
+                return;
+            }
+            requestAnimationFrame(gameLoop);
+            // 降低帧率，控制速度
+            if(Date.now() % 8 !==0) return;
+
+            // 蛇头新位置
+            const head = {x:snake[0].x+dx, y:snake[0].y+dy};
+            // 撞墙判定
+            if(head.x<0||head.x>=canvas.width/grid||head.y<0||head.y>=canvas.height/grid){
+                gameOver = true;
+            }
+            // 撞到自己判定
+            snake.forEach(seg=>{
+                if(seg.x===head.x && seg.y===head.y) gameOver=true;
+            })
+
+            snake.unshift(head);
+            // 判断是否吃到食物
+            if(head.x===food.x && head.y===food.y){
+                score++;
+                scoreDom.innerText = score;
+                createFood();
+            }else{
+                snake.pop();
+            }
+
+            // 绘制背景
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            // 绘制蛇
+            ctx.fillStyle = '#4cd964';
+            snake.forEach(seg=>{
+                ctx.fillRect(seg.x*grid, seg.y*grid, grid-1, grid-1);
+            })
+            // 绘制食物
+            ctx.fillStyle = '#ff3b30';
+            ctx.fillRect(food.x*grid, food.y*grid, grid-1, grid-1);
+        }
+
+        createFood();
+        gameLoop();
+    </script>
+    <meta charset="UTF-8">
+    <title>简易留言板</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:微软雅黑;}
         body{max-width:800px;margin:30px auto;padding:0 20px;background:#f5f7fa;}
@@ -36,15 +153,5 @@
         <div class="msg-content">这是一条示例留言~</div>
     </div>
 </div>
-    <h1>			 	DMM                 </h1>
-    <p>☃☃☃☃</p>
-	 <a href="https://www.4399.com">4399</a>
-<br>
- <a href="https://www.poki.com">poki</a>
-   
-    <br>
- <a href="https://fllor.io">fllor</a>
-   
-    <br>
 </body>
 </html>
